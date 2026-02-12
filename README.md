@@ -1,2 +1,2 @@
-# gof-webpage
+# golf-webpage
 Webpage About Golf
