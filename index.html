@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<title>Baxter</title>
+<style>
+h1 {
+  color: blue;
+  font-family: verdana;
+  font-size: 300%;
+}
+p {
+  color: red;
+  font-family: courier;
+  font-size: 160%;
+}
+</style>
+<body style="background-color:powderblue;">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 style="text-align:center;">
+    <i class="fa-solid fa-golf-ball-tee"></i> All About Golf
+    <i class="fa-solid fa-golf-ball-tee"></i>
+</h1>
+
+<h2>The History of Golf</h2>
+<img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNIr2ZW3hUXJLHIh-Vqux-JEafwqg3fegOuA&s" height="110">
+<p1>Golf originated in 15th century Scotland, specifically around St. Andrews in the 1400s. While similar ball games existed in ancient China and Rome, modern golf as we know it began when Scottish golfers started playing on natural sand dunes along the Scottish coast.
+
+The question of when golf originated sparks debate among golf historians worldwide. While golf-like games appeared in various forms throughout ancient times, the sport we recognize today has clear Scottish roots dating back over 500 years. Understanding where golf started helps explain why certain traditions and rules still govern the modern game. From ancient ball games to today's professional tournaments, golf's evolution tells a story of innovation and global expansion.<a href="https://share.google/DutcZvKR7Kbto4PXW">USGA Official Website</a></p1>
+<hr>
+<div class="header-flex">
+    <div class="header-text">
+        <h2>The Most Famous Golfers of All Time</h2>
+        <p>From the golden era of Jack Nicklaus to the modern dominance of Scottie Scheffler, these athletes have defined the sport through their major championship wins and impact on the game.</p>
+    </div>
+<div class="header-img-container">
+    <a href="https://worldgolfhalloffame.org/" target="_blank">
+        <img src="https://waxgolf.com/wp-content/uploads/2015/12/nicklaus-woods.jpg" 
+             alt="Jack Nicklaus and Tiger Woods" 
+             class="header-img"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=Golf+Legends+Image';">
+    </a>
+</div></div>
+
+<div style="position: relative; width: 100%; margin-bottom: 10px;">
+  <input type="text" id="golferSearch" onkeyup="searchLeaderboard()" placeholder="Search for a golfer..." 
+         style="padding: 10px 40px 10px 10px; width: 100%; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
+  
+  <span id="clearSearch" onclick="clearSearchField()" 
+        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999; display: none; font-weight: bold; font-family: Arial;">
+        &times;
+  </span>
+</div>
+<!-- Set up the table with cells later -->
+<section class="leaderboard-area" style="background-color: white; padding: 20px; border-radius: 12px; margin: 20px 0;">
+  <h2 style="color: #2e7d32; text-align: center;">🏆 Global Legends Leaderboard</h2>
+  
+  <div style="text-align: center; margin-bottom: 15px;">
+    <button class="golf-btn" onclick="sortLeaderboard('majors')">Sort by Majors</button>
+    <button class="golf-btn" onclick="sortLeaderboard('name')">Sort A-Z</button>
+  </div>
+
+  <table id="legendTable">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Player Name</th>
+        <th>Majors</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboardBody">
+      </tbody>
+  </table>
+</section>
+<p>
+  <a href="https://www.youtube.com/watch?v=E1LM7h5hXIY&source_ve_path=MTc4NDI0">Watch Sam Snead's "Slammin' Sammy" Swing on YouTube</a>
+</p> <p><em>Sam Snead's "Slammin' Sammy" swing is still studied by pros today for its fluidity and rhythm.</em></p>
+</div>
+<hr>
+<p2>
+<section>
+<h3><u>Golf Clubs</u></h3>
+
+<section class="club-grid">
+  <div class="club-card">
+    <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=400" alt="Driver and Woods">
+    <h3>Driver & Woods</h3>
+    <p><em>Driver, 3-wood, 5-wood, 7-wood</em></p>
+  </div>
+
+  <div class="club-card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5cw9beJQT555PTPPU5ecVzDbmqDEPbq0htouSXwbtOX_QjzWazYuaTEDMHYAc" alt="Golf Hybrid Club">
+  <h3>Hybrids</h3>
+  <p><em>3-hybrid, 4-hybrid, 5-hybrid</em></p>
+</div>
+
+  <div class="club-card">
+    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSpSKFsVnlULz0_HqEaOg1d-lc5WDQORbNBQZrGQBLFZVY_DZzN69gksl_XRMe0" alt="Golf Irons">
+    <h3>Irons</h3>
+    <p><em>4-iron through 9-iron</em></p>
+  </div>
+  
+  </section><br>
+<div style="background-color: white; padding: 25px; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h3 style="color: purple; margin-top: 0;"><u>Clubs in the Bag</u></h3>
+    <p style="color: red; font-family: 'Courier New', Courier, monospace; line-height: 1.6; font-weight: bold;">
+        You are allowed to have 14 clubs in your bag while playing. There is a lot of strategy that goes into selecting which clubs to use. Some pros will have both a driver and a mini-driver, or they may have 4 wedges.
+    </p>
+</div>
+<section class="club-grid">
+<div class="club-card">
+    <img src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=500&q=80" alt="Golf Wedges">
+    <h3>Wedges</h3>
+    <p><em>Pitching, Sand, and Lob Wedges</em></p>
+  </div>
+
+  <div class="club-card">
+    <img src="https://golf.com/wp-content/uploads/2023/12/Our_Picks_Fairway-Jockey_best-selling-putters-year2023.jpg" alt="Golf Putter">
+    <h3>Putter</h3>
+    <p><em>Blade or Mallet style</em></p>
+</section>
+  <br><hr>
+ <div class="interaction-area">
+  <h3>📗 Golf Terms Glossary</h3>
+  <p>Confused by the lingo? Click a term to learn what it means!</p>
+  <div class="button-group" style="flex-wrap: wrap;">
+    <button class="golf-btn" onclick="showTerm('Birdie')">Birdie</button>
+    <button class="golf-btn" onclick="showTerm('Eagle')">Eagle</button>
+    <button class="golf-btn" onclick="showTerm('Bogey')">Bogey</button>
+    <button class="golf-btn" onclick="showTerm('Par')">Par</button>
+    <button class="golf-btn" onclick="showTerm('Mulligan')">Mulligan</button>
+  </div>
+</div>
+<audio id="golfSound" src="NEW_SWING_URL.mp3"></audio>
+
+<section class="scorecard-area">
+  <h2>Your Round Scorecard</h2>
+  <table id="scorecard">
+    <thead>
+      <tr>
+        <th>Hole</th>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+        <th class="total-col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Par</td>
+        <td>4</td><td>3</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td><td>4</td><td>5</td>
+        <td>36</td>
+      </tr>
+      <tr>
+        <td>Score</td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td id="totalScore" class="total-col">0</td>
+      </tr>
+    </tbody>
+  </table>
+ <h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
+<button class="golf-btn" onclick="resetScorecard()" style="margin-top: 10px; background-color: #666;">
+  <i class="fa-solid fa-rotate-right"></i> Reset Scorecard
+</button>
+</section>
+<section class="interaction-area">
+  <h2>Have you played golf before?</h2>
+  <div class="button-group">
+    <button class="golf-btn" onclick="showWelcome('pro')">Yes, I'm a pro!</button>
+    <button class="golf-btn" onclick="showWelcome('beginner')">No, I'm a beginner</button>
+  </div>
+</section>
+
+<div id="welcomeBox" class="modal-box">
+  <button class="close-x" onclick="closeWelcome()">&times;</button>
+  <h3 id="welcomeTitle"></h3>
+  <div id="welcomeContent"></div>
+</div>
+
+<script>
+// 1. Scorecard Math & Celebration
+function updateScore() {
+    const inputs = document.querySelectorAll('.hole-score');
+    const totalDisplay = document.getElementById('totalScore');
+    const statusText = document.getElementById('scoreStatus');
+    const holePars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; 
+    
+    let total = 0;
+    let parPlayed = 0;
+    let hasValue = false;
+
+    inputs.forEach((input, index) => {
+        let val = parseInt(input.value);
+        
+        // 1. Reset colors
+        input.classList.remove('score-eagle', 'score-birdie', 'score-par', 'score-bogey', 'score-double');
+
+        if (!isNaN(val)) {
+            total += val;
+            parPlayed += holePars[index];
+            hasValue = true;
+
+            // 2. Apply color coding to the input box
+            let diff = val - holePars[index];
+            if (diff <= -2) input.classList.add('score-eagle');
+            else if (diff === -1) input.classList.add('score-birdie');
+            else if (diff === 0) input.classList.add('score-par');
+            else if (diff === 1) input.classList.add('score-bogey');
+            else if (diff >= 2) input.classList.add('score-double');
+
+            if (val === 1) triggerCelebration();
+        }
+    });
+
+    // 3. Update the Total Display
+    if (totalDisplay) totalDisplay.innerText = total;
+
+    // 4. Update the Overall Score Message
+    if (statusText) {
+        if (!hasValue) {
+            statusText.innerText = "Start your round!";
+            statusText.style.color = "#2e7d32";
+        } else {
+            let overallDiff = total - parPlayed;
+            if (overallDiff < 0) {
+                statusText.innerText = Math.abs(overallDiff) + " Under Par";
+                statusText.style.color = "red";
+            } else if (overallDiff > 0) {
+                statusText.innerText = "+" + overallDiff + " Over Par";
+                statusText.style.color = "black";
+            } else {
+                statusText.innerText = "Even Par";
+                statusText.style.color = "green";
+            }
+        }
+    }
+}
+// 2. Reset Button Function
+function resetScorecard() {
+    document.querySelectorAll('.hole-score').forEach(input => input.value = '');
+    updateScore(); // Re-runs the math to reset totals to 0
+}
+
+// 3. Audio & Click Effects (One Listener to rule them all)
+window.addEventListener('click', function(e) {
+    // A. Swing Sound (Doesn't play if clicking buttons or inputs)
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
+        const swing = document.getElementById("golfSound");
+        if (swing) {
+            swing.pause();
+            swing.currentTime = 0;
+            swing.play().catch(() => {});
+        }
+    }
+
+    // B. Ripple & Grass Particles
+    const ripple = document.createElement('div');
+    ripple.className = 'click-ripple';
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+
+    for (let i = 0; i < 6; i++) {
+        const grass = document.createElement('div');
+        grass.className = 'grass-particle';
+        grass.style.left = e.clientX + 'px';
+        grass.style.top = e.clientY + 'px';
+        const vX = (Math.random() - 0.5) * 150;
+        const vY = -Math.random() * 200 - 50;
+        document.body.appendChild(grass);
+        grass.animate([
+            { transform: 'translate(0, 0)', opacity: 1 },
+            { transform: `translate(${vX}px, ${vY}px) rotate(720deg)`, opacity: 0 }
+        ], { duration: 600 }).onfinish = () => grass.remove();
+    }
+});
+
+// 4. Celebration & Modal Helpers
+function triggerCelebration() {
+    const hioSound = document.getElementById("holeInOneSound");
+    if (hioSound) { hioSound.currentTime = 0; hioSound.play().catch(() => {}); }
+}
+
+function showWelcome(type) {
+  const box = document.getElementById("welcomeBox");
+  const title = document.getElementById("welcomeTitle");
+  const content = document.getElementById("welcomeContent");
+
+  box.style.display = "block";
+
+  if (type === 'pro') {
+    title.innerHTML = "🏆 Pro Status Confirmed!";
+    content.innerHTML = `
+      <p>You're in elite company! As of February 2026, <strong>Scottie Scheffler</strong> continues to lead the World Rankings. 
+      Have you dialed in your <em>Strokes Gained</em> metrics lately?</p>
+      <div style="background: #e8f5e9; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 10px;">
+        <strong>Pro Insight:</strong> Modern pros are focusing on <em>Low Point Control</em>—ensuring the club hits the ball before the turf every single time.
+      </div>
+    `;
+    if(typeof createConfetti === 'function') createConfetti("#2e7d32"); 
+  } else {
+    title.innerHTML = "⛳ Welcome to the Tee!";
+    content.innerHTML = `
+      <p>Golf is a journey, not a race. Did you know that walking 18 holes burns about <strong>1,400 calories</strong>? It's the best workout with a view!</p>
+      <div style="background: #f1f8e9; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 10px;">
+        <strong>Beginner Tip:</strong> Focus on "Ready Golf." Be ready to hit when it's your turn to keep the game fun for everyone!
+      </div>
+    `;
+    if(typeof createConfetti === 'function') createConfetti("#4CAF50");
+  }
+}function closeWelcome() { document.getElementById("welcomeBox").style.display = "none"; }
+
+function showTerm(term) {
+  const box = document.getElementById("welcomeBox");
+  const title = document.getElementById("welcomeTitle");
+  const content = document.getElementById("welcomeContent");
+  
+  const definitions = {
+    'Birdie': 'Completing a hole in **one stroke under** Par (e.g., a 3 on a Par 4).',
+    'Eagle': 'Completing a hole in **two strokes under** Par. Very impressive!',
+    'Bogey': 'Completing a hole in **one stroke over** Par.',
+    'Par': 'The standard number of strokes an expert golfer is expected to need for a hole.',
+    'Mulligan': 'An informal "do-over" shot that doesn’t count against your score (usually only allowed in friendly games!).'
+  };
+
+  title.innerHTML = `Golf Term: ${term}`;
+  content.innerHTML = `<p>${definitions[term]}</p>
+                       <button class="golf-btn" onclick="document.getElementById('welcomeBox').style.display='none'">Got it!</button>`;
+  box.style.display = "block";
+}
+// 5. Hover Sounds for Clubs
+document.querySelectorAll('.club-card img').forEach(club => {
+    club.addEventListener('mouseenter', () => {
+        const jingle = document.getElementById("bagSound");
+        if (jingle) { jingle.currentTime = 0; jingle.volume = 0.3; jingle.play().catch(() => {}); }
+    });
+});
+// 1. Our Data Set (The "Digital Filing Cabinet")
+const golfLegends = [
+    { name: "Jack Nicklaus", majors: 18, status: "Legend" },
+    { name: "Tiger Woods", majors: 15, status: "Active/Legend" },
+    { name: "Bobby Jones", majors: 13, status: "Amateur Icon" },
+    { name: "Ben Hogan", majors: 9, status: "Ball Striker" },
+    { name: "Gary Player", majors: 9, status: "International" },
+    { name: "Tom Watson", majors: 8, status: "Legend" },
+    { name: "Phil Mickelson", majors: 6, status: "Legend/Active" },
+    { name: "Brooks Koepka", majors: 5, status: "Major Specialist" },
+    { name: "Rory McIlroy", majors: 5, status: "Grand Slam Winner" },
+    { name: "Scottie Scheffler", majors: 4, status: "World No. 1" }
+];
+// 2. Function to build the table
+function buildLeaderboard(data) {
+    const tableBody = document.getElementById('leaderboardBody');
+    tableBody.innerHTML = ''; // Clear the table first
+
+data.forEach((player, index) => {
+    const statusLower = player.status.toLowerCase();
+    
+    // 1. Check if they are modern/active
+    const isModern = statusLower.includes("active") || 
+                     statusLower.includes("specialist") || 
+                     statusLower.includes("winner") || 
+                     statusLower.includes("world");
+
+    // 2. Uniform Status Formatting (Reversed)
+    let displayStatus = player.status;
+    if (isModern) {
+        // Remove existing "Active" tags to prevent doubling up
+        let cleanTitle = player.status
+            .replace(/Active\//gi, "")
+            .replace(/\/Active/gi, "")
+            .replace(/Active /gi, "")
+            .replace(/ \/ /gi, "");
+
+        // Force the order to be: [Their Title] / Active
+        displayStatus = cleanTitle + " / Active";
+    }
+
+    const badgeClass = isModern ? "badge-active" : "badge-legend";
+
+    // 3. Add the Blinking Dot for Active Players
+    const liveDot = isModern ? '<span class="live-dot"></span> ' : '';
+
+    // 4. Icon Logic
+    let icon = player.majors >= 10 
+        ? '<i class="fa-solid fa-crown" style="color: gold;"></i> ' 
+        : '<i class="fa-solid fa-trophy" style="color: silver;"></i> ';
+
+    const row = `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${icon} ${liveDot}<strong>${player.name}</strong></td>
+            <td>${player.majors}</td>
+            <td><span class="status-badge ${badgeClass}">${displayStatus}</span></td>
+        </tr>
+    `;
+    tableBody.innerHTML += row;
+});
+// Add a blinking dot only if they are active
+const liveDot = isActive ? '<span class="live-dot"></span> ' : '';
+
+const row = `
+    <tr>
+        <td>${index + 1}</td>
+        <td>${icon} ${liveDot}<strong>${player.name}</strong></td>
+        <td>${player.majors}</td>
+        <td><span class="status-badge ${badgeClass}">${player.status}</span></td>
+    </tr>
+`;
+}
+function searchLeaderboard() {
+    const searchInput = document.getElementById("golferSearch");
+    const clearBtn = document.getElementById("clearSearch");
+    const searchTerm = searchInput.value.toLowerCase();
+    
+    // Show the 'X' button if there is text, otherwise hide it
+    clearBtn.style.display = searchTerm.length > 0 ? "block" : "none";
+
+    const filteredData = golfLegends.filter(player => 
+        player.name.toLowerCase().includes(searchTerm)
+    );
+
+    buildLeaderboard(filteredData);
+}
+
+function clearSearchField() {
+    const searchInput = document.getElementById("golferSearch");
+    const clearBtn = document.getElementById("clearSearch");
+    
+    searchInput.value = "";    // Clear the text
+    clearBtn.style.display = "none"; // Hide the button
+    
+    buildLeaderboard(golfLegends); // Show the full list again
+    searchInput.focus();           // Put the cursor back in the box
+}// 3. Function to sort the data
+function sortLeaderboard(criteria) {
+    if (criteria === 'majors') {
+        golfLegends.sort((a, b) => b.majors - a.majors); // High to Low
+    } else if (criteria === 'name') {
+        golfLegends.sort((a, b) => a.name.localeCompare(b.name)); // A to Z
+    }
+    buildLeaderboard(golfLegends); // Re-build with new order
+// This ensures they are ranked correctly as soon as you open the page
+sortLeaderboard('majors');
+}
+
+// 4. Initial Build on page load
+buildLeaderboard(golfLegends);
+</script></body>
+</html>
