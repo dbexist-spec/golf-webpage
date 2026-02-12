@@ -466,3 +466,78 @@ aside {
 .score-par { background-color: #ccffcc !important; color: black; }    /* Light Green */
 .score-bogey { background-color: #e0e0e0 !important; color: black; }  /* Light Gray */
 .score-double { background-color: #b3b3b3 !important; color: black; } /* Darker Gray */
+/* This only triggers on mobile devices */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column; /* Stacks your "Legends" and "Pro" boxes vertically */
+    text-align: center;
+  }
+
+  .golf-btn {
+    width: 100%; /* Makes buttons big enough to tap easily with a thumb */
+    font-size: 18px; /* Larger text for easier reading on small screens */
+    margin-bottom: 10px;
+  }
+
+  table {
+    font-size: 12px; /* Shrinks the leaderboard slightly so it doesn't overflow */
+  }
+}
+/* Scorecard Table Styling */
+table {
+    width: 95%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #1b5e20; /* Golf Green */
+    color: white;
+    padding: 12px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Make the 'Par' row stand out */
+tr:nth-child(1) {
+    background-color: #f1f8e9;
+    font-weight: bold;
+}
+
+/* Highlight the Total column */
+td:last-child, th:last-child {
+    background-color: #fbc02d; /* Gold/Yellow */
+    font-weight: bold;
+}
+
+/* Mobile responsive tweak */
+@media (max-width: 600px) {
+    table { font-size: 12px; }
+    td, th { padding: 5px; }
+}
+@media print {
+    /* Hide the Nav Bar and Buttons so they don't waste ink */
+    nav, button, .no-print {
+        display: none !important;
+    }
+
+    /* Center the scorecard on the paper */
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border: 2px solid black;
+    }
+}

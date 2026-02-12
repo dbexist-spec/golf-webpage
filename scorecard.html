@@ -3,50 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History of Golf</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Golf Scorecard</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-<nav style="background: #1b5e20; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000;">
-      <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
-      <a href="about.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">History</a>
-      <a href="scorecard.html" style="color: white; margin: 0 15px; text-decoration: none;">Scorecard</a>
-    </nav>
-<section class="scorecard-area">
-  <h2>Your Round Scorecard</h2>
-  <table id="scorecard">
-    <thead>
-      <tr>
-        <th>Hole</th>
-        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
-        <th class="total-col">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Par</td>
-        <td>4</td><td>3</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td><td>4</td><td>5</td>
-        <td>36</td>
-      </tr>
-      <tr>
-        <td>Score</td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td id="totalScore" class="total-col">0</td>
-      </tr>
-    </tbody>
-  </table>
- <h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
+<nav style="background: #1b5e20; padding: 15px 0; text-align: center; width: 100%; position: sticky; top: 0; z-index: 99999; border-bottom: 3px solid #fbc02d;">
+  <a href="index.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">⛳ Home</a>
+  <a href="about.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">🏆 Tournaments</a>
+  <a href="scorecard.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">📝 Scorecard</a>
+</nav><section class="scorecard-area">
+    <h2 style="text-align: center; font-family: sans-serif; color: #1b5e20;">Your Round Scorecard</h2>
+<p style="text-align: center; color: #666; font-style: italic;">
+    Course Rating: 72.4 | Slope: 132 | Yardage: 3,145
+</p>
+</div>
+
+<table style="width: 100%; border-collapse: collapse; font-family: sans-serif; margin-bottom: 20px;">
+  <tr style="background-color: #1b5e20; color: white;">
+    <th style="padding: 10px; border: 1px solid #ddd;">Hole</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">1</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">2</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">3</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">4</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">5</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">6</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">7</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">8</th>
+    <th style="padding: 10px; border: 1px solid #ddd;">9</th>
+    <th style="padding: 10px; border: 1px solid #ddd; background-color: #fbc02d; color: black;">Total</th>
+  </tr>
+  <tr>
+    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Par</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">3</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">5</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">3</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">4</td>
+    <td style="padding: 10px; border: 1px solid #ddd;">5</td>
+    <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">36</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold;">Score</td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td><input type="number" class="score" style="width: 40px;"></td>
+    <td id="totalScore" style="font-weight: bold; background-color: #fff9c4;">0</td>
+</tr>
+</table>
+<h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
 <button class="golf-btn" onclick="resetScorecard()" style="margin-top: 10px; background-color: #666;">
   <i class="fa-solid fa-rotate-right"></i> Reset Scorecard
 </button>
-</section>
+<button onclick="window.print()" style="margin-top: 20px; margin-left: 10px; padding: 10px 20px; background-color: #1b5e20; color: white; border: none; cursor: pointer; border-radius: 5px;">
+    🖨️ Save/Print Round
+</button>
+<div style="margin-top: 30px; text-align: center; font-family: sans-serif;">
+    <h3 style="color: #1b5e20;">⛳ Example Scorecard</h3>
+    <div style="border: 5px solid #1b5e20; border-radius: 10px; display: inline-block; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <img src="https://www.falconvalleygolf.com/wp-content/uploads/sites/6064/2023/01/Fvalley-scorecard-e1675092618411.jpg" alt="Falcon Valley" style="display: block; max-width: 100%; height: auto; width: 600px;">
+    </div>
+    <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Click hole numbers to see specific tips (Coming Soon!)</p>
+</div>
+<script>
+    // This adds up the scores automatically
+const scoreInputs = document.querySelectorAll('.score');
+const totalDisplay = document.getElementById('totalScore');
+const pars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; // The Par for each hole
+
+scoreInputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+        let totalScore = 0;
+        let runningPar = 0;
+        let holesPlayed = 0;
+
+        scoreInputs.forEach((inputBox, i) => {
+            let val = Number(inputBox.value);
+            
+            if (inputBox.value !== "" && val > 0) {
+                totalScore += val;
+                runningPar += pars[i];
+                holesPlayed++;
+
+                // ⛳ HOLE-BY-HOLE COLOR CODING
+                if (val < pars[i]) {
+                    inputBox.style.backgroundColor = "#ffcdd2"; // Red for Birdie/Under
+                    inputBox.style.color = "#b71c1c";
+                } else if (val > pars[i]) {
+                    inputBox.style.backgroundColor = "#bbdefb"; // Blue for Bogey/Over
+                    inputBox.style.color = "#0d47a1";
+                } else {
+                    inputBox.style.backgroundColor = "#c8e6c9"; // Green for Par
+                    inputBox.style.color = "#1b5e20";
+                }
+            } else {
+                inputBox.style.backgroundColor = "white"; // Reset if empty
+            }
+        });
+
+        // Update the Total Display
+        if (holesPlayed === 0) {
+            totalDisplay.innerText = "0";
+            totalDisplay.style.color = "black";
+            return;
+        }
+
+        let diff = totalScore - runningPar;
+        let status = diff < 0 ? ` (${Math.abs(diff)} Under)` : diff > 0 ? ` (${diff} Over)` : " (E)";
+        totalDisplay.style.color = diff < 0 ? "red" : diff > 0 ? "blue" : "green";
+        totalDisplay.innerText = totalScore + status;
+    });
+});
+
+function resetScorecard() {
+    scoreInputs.forEach(input => {
+        input.value = '';
+        input.style.backgroundColor = "white";
+    });
+    totalDisplay.innerText = '0';
+    totalDisplay.style.color = "black";
+}
+    // This makes the Reset button work
+    function resetScorecard() {
+        document.querySelectorAll('.score').forEach(i => i.value = '');
+        document.getElementById('totalScore').innerText = '0';
+    }
+</script>
 </body>
 </html>

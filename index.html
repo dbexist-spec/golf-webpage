@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <title>Baxter</title>
 <style>
@@ -19,16 +20,14 @@ p {
 <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-  <div style="display: block !important; width: 100%; background-color: #1b5e20; border-bottom: 4px solid #fbc02d; padding: 20px 0; text-align: center; position: relative; z-index: 99999;">
-    <a href="index.html" style="color: white; margin: 0 25px; text-decoration: none; font-family: 'Segoe UI', Arial, sans-serif; font-weight: bold; font-size: 20px;">Home</a>
-    <a href="about.html" style="color: white; margin: 0 25px; text-decoration: none; font-family: 'Segoe UI', Arial, sans-serif; font-weight: bold; font-size: 20px;">History</a>
-    <a href="scorecard.html" style="color: white; margin: 0 25px; text-decoration: none; font-family: 'Segoe UI', Arial, sans-serif; font-weight: bold; font-size: 20px;">Scorecard</a>
-</div>
-<h1 style="text-align:center;">
-    <i class="fa-solid fa-golf-ball-tee"></i> All About Golf
-    <i class="fa-solid fa-golf-ball-tee"></i>
-</h1>
+<body>
+<nav style="background: #1b5e20; padding: 15px 0; text-align: center; width: 100%; position: sticky; top: 0; z-index: 99999; border-bottom: 3px solid #fbc02d;">
+  <a href="index.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">⛳ Home</a>
+  <a href="about.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">🏆 Tournaments</a>
+  <a href="scorecard.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">📝 Scorecard</a>
+</nav>
 
+<h1> ⛳ All About Golf ⛳ </h1>
 <h2>The History of Golf</h2>
 <img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNIr2ZW3hUXJLHIh-Vqux-JEafwqg3fegOuA&s" height="110">
 <p1>Golf originated in 15th century Scotland, specifically around St. Andrews in the 1400s. While similar ball games existed in ancient China and Rome, modern golf as we know it began when Scottish golfers started playing on natural sand dunes along the Scottish coast.
@@ -140,42 +139,7 @@ The question of when golf originated sparks debate among golf historians worldwi
   </div>
 </div>
 <audio id="golfSound" src="NEW_SWING_URL.mp3"></audio>
-
-<section class="scorecard-area">
-  <h2>Your Round Scorecard</h2>
-  <table id="scorecard">
-    <thead>
-      <tr>
-        <th>Hole</th>
-        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
-        <th class="total-col">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Par</td>
-        <td>4</td><td>3</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td><td>4</td><td>5</td>
-        <td>36</td>
-      </tr>
-      <tr>
-        <td>Score</td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
-        <td id="totalScore" class="total-col">0</td>
-      </tr>
-    </tbody>
-  </table>
- <h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
-<button class="golf-btn" onclick="resetScorecard()" style="margin-top: 10px; background-color: #666;">
-  <i class="fa-solid fa-rotate-right"></i> Reset Scorecard
-</button>
+ 
 </section>
 <section class="interaction-area">
   <h2>Have you played golf before?</h2>
@@ -462,6 +426,4 @@ sortLeaderboard('majors');
 // 4. Initial Build on page load
 buildLeaderboard(golfLegends);
 </script></body>
-
 </html>
-
