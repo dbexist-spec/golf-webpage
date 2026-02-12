@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of Golf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav style="background: #1b5e20; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000;">
+      <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
+      <a href="about.html" style="color: white; margin: 0 15px; text-decoration: none; font-weight: bold;">History</a>
+      <a href="scorecard.html" style="color: white; margin: 0 15px; text-decoration: none;">Scorecard</a>
+    </nav>
+<section class="scorecard-area">
+  <h2>Your Round Scorecard</h2>
+  <table id="scorecard">
+    <thead>
+      <tr>
+        <th>Hole</th>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+        <th class="total-col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Par</td>
+        <td>4</td><td>3</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td><td>4</td><td>5</td>
+        <td>36</td>
+      </tr>
+      <tr>
+        <td>Score</td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td><input type="number" class="hole-score" oninput="updateScore()"></td>
+        <td id="totalScore" class="total-col">0</td>
+      </tr>
+    </tbody>
+  </table>
+ <h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
+<button class="golf-btn" onclick="resetScorecard()" style="margin-top: 10px; background-color: #666;">
+  <i class="fa-solid fa-rotate-right"></i> Reset Scorecard
+</button>
+</section>
+</body>
+</html>
