@@ -142,19 +142,56 @@ The question of when golf originated sparks debate among golf historians worldwi
  
 </section>
 <section class="interaction-area">
-  <h2>Have you played golf before?</h2>
-  <div class="button-group">
-    <button class="golf-btn" onclick="showWelcome('pro')">Yes, I'm a pro!</button>
-    <button class="golf-btn" onclick="showWelcome('beginner')">No, I'm a beginner</button>
-  </div>
-</section>
-
-<div id="welcomeBox" class="modal-box">
-  <button class="close-x" onclick="closeWelcome()">&times;</button>
-  <h3 id="welcomeTitle"></h3>
-  <div id="welcomeContent"></div>
+<div style="text-align: center; margin: 40px 0; font-family: sans-serif;">
+    <h2>Have you played golf before?</h2>
+    <button onclick="showPro()" style="background-color: #1b5e20; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">Yes, I'm a pro!</button>
+    <button onclick="showBeg()" style="background-color: #0d47a1; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">No, I'm a beginner</button>
 </div>
 
+<div id="proModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85);">
+    <div style="background-color: white; margin: 15% auto; padding: 30px; border-radius: 15px; width: 80%; max-width: 500px; position: relative; border: 3px solid #1b5e20; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: sans-serif;">
+        
+        <span onclick="closeModals()" style="position:absolute; top:10px; right:20px; font-size:35px; cursor:pointer; color:#aaa;">&times;</span>
+        
+        <h2 style="color: #1b5e20; margin-top: 0;">🏆 Pro Status Confirmed!</h2>
+        <p>You're in elite company! As of 2026, <strong>Scottie Scheffler</strong> continues to lead the rankings.</p>
+        <p style="background: #f1f8e9; padding: 15px; border-left: 5px solid #1b5e20; border-radius: 4px;">
+            <em>Pro Insight:</em> Modern pros focus on <strong>Strokes Gained</strong> and maintaining <strong>Low Point Control</strong>.
+        </p>
+    </div>
+</div>
+
+<div id="beginnerModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85);">
+    <div style="background-color: white; margin: 15% auto; padding: 30px; border-radius: 15px; width: 80%; max-width: 500px; position: relative; border: 3px solid #0d47a1; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: sans-serif;">
+        <span onclick="closeModals()" style="position:absolute; top:10px; right:20px; font-size:35px; cursor:pointer; color:#aaa;">&times;</span>
+        <h2 style="color: #0d47a1; margin-top: 0;">🌱 Welcome to the Game!</h2>
+        <p>Golf is a journey. Focus on your grip and just have fun. Everyone starts at the driving range!</p>
+    </div>
+</div>
+
+<script>
+function showPro() {
+    document.getElementById('proModal').style.display = 'block';
+}
+
+function showBeg() {
+    document.getElementById('beginnerModal').style.display = 'block';
+}
+
+function closeModals() {
+    document.getElementById('proModal').style.display = 'none';
+    document.getElementById('beginnerModal').style.display = 'none';
+}
+
+// Close when clicking the dark background area
+window.onclick = function(event) {
+    var pro = document.getElementById('proModal');
+    var beg = document.getElementById('beginnerModal');
+    if (event.target == pro || event.target == beg) {
+        closeModals();
+    }
+}
+</script>
 <script>
 // 1. Scorecard Math & Celebration
 function updateScore() {
@@ -425,5 +462,19 @@ sortLeaderboard('majors');
 
 // 4. Initial Build on page load
 buildLeaderboard(golfLegends);
-</script></body>
+window.onclick = function(event) {
+    // Get the background divs
+    var pro = document.getElementById('proModal');
+    var beg = document.getElementById('beginnerModal');
+
+    // If the thing you clicked IS the background, hide it
+    if (event.target == pro) {
+        pro.style.display = "none";
+    }
+    if (event.target == beg) {
+        beg.style.display = "none";
+    }
+}
+</script>
+</body>
 </html>
