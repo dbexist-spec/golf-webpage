@@ -305,6 +305,12 @@ aside {
   border-left: 5px solid #2e7d32; /* A nice golf green color */
   animation: fadeIn 0.5s;
 }
+
+.birdie { background-color: #fff176 !important; font-weight: bold; } /* Yellow */
+.eagle { background-color: #ffd54f !important; border: 2px solid gold !important; } /* Gold */
+.bogey { background-color: #cfd8dc !important; } /* Grey */
+.double-bogey { background-color: #ffab91 !important; } /* Light Red */
+.par { background-color: #ffffff !important; } /* White */
 .scorecard-area {
   margin: 30px auto;
   max-width: 800px;
@@ -328,6 +334,7 @@ aside {
   background-color: #2e7d32;
   color: white;
 }
+
 
 .hole-score {
   width: 40px;
