@@ -5,13 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Golf Scorecard</title>
     <link rel="stylesheet" href="stylesheet.css">
+<style>
+    /* Individual Hole Colors */
+    .birdie { background-color: #fff176 !important; font-weight: bold; color: black !important; }
+    .eagle { background-color: #ffd54f !important; border: 2px solid gold !important; color: black !important; }
+    .bogey { background-color: #cfd8dc !important; color: black !important; }
+    .double-bogey { background-color: #ffab91 !important; color: black !important; }
+    .par { background-color: #ffffff !important; color: black !important; }
+
+    /* Make the input boxes look cleaner */
+    input[type="number"] {
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: 0.3s;
+    }
+</style>
 </head>
 <body>
 <nav style="background: #1b5e20; padding: 15px 0; text-align: center; width: 100%; position: sticky; top: 0; z-index: 99999; border-bottom: 3px solid #fbc02d;">
   <a href="index.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">⛳ Home</a>
   <a href="about.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">🏆 Tournaments</a>
-  <a href="scorecard.html" style="color: white; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">📝 Scorecard</a>
-</nav><section class="scorecard-area">
+  <a href="scorecard.html" style="color: #fbc02d; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">📝 Scorecard</a>
+</nav>
+<section class="scorecard-area">
     <h2 style="text-align: center; font-family: sans-serif; color: #1b5e20;">Your Round Scorecard</h2>
 <p style="text-align: center; color: #666; font-style: italic;">
     Course Rating: 72.4 | Slope: 132 | Yardage: 3,145
@@ -45,21 +62,59 @@
     <td style="padding: 10px; border: 1px solid #ddd;">5</td>
     <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">36</td>
   </tr>
-  <tr>
-    <td style="font-weight: bold;">Score</td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td><input type="number" class="score" style="width: 40px;"></td>
-    <td id="totalScore" style="font-weight: bold; background-color: #fff9c4;">0</td>
+     <tr id="front-nine-row">
+    <td><strong>Score</strong></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="front-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><strong id="front-total">0</strong></td>
 </tr>
 </table>
-<h2 id="scoreStatus" style="margin-top: 20px; color: #2e7d32;">Start your round!</h2>
+<button onclick="toggleBackNine()" style="background-color: #1b5e20; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0;">
+    Show/Hide Holes 10-18
+</button>
+
+<div id="backNine" style="display: none; margin-top: 20px;">
+    <h3>Back Nine (Holes 10-18)</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr style="background-color: #1b5e20; color: white;">
+            <th>HOLE</th>
+            <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th>
+            <th>TOTAL</th>
+        </tr>
+        <tr>
+            <td><strong>Par</strong></td>
+            <td>4</td><td>4</td><td>3</td><td>5</td><td>4</td><td>4</td><td>3</td><td>4</td><td>5</td>
+            <td><strong>36</strong></td>
+        </tr>
+     <tr>
+    <td><strong>Score</strong></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><input type="number" class="back-score" oninput="calculateTotal()" style="width: 40px;"></td>
+    <td><strong id="back-total">0</strong></td>
+</tr>
+    </table>
+</div>
+<div style="margin-top: 30px; border-top: 2px solid #1b5e20; padding-top: 20px;">
+    <h2 style="color: #1b5e20;">Round Summary</h2>
+    <div style="background: #f1f8e9; padding: 20px; border-radius: 10px; border: 1px solid #1b5e20;">
+        <span style="font-size: 20px; font-weight: bold;">GRAND TOTAL (18 HOLES): </span>
+        <span id="grand-total" style="font-size: 28px; font-weight: bold;">0</span>
+    </div>
+</div>
 <button class="golf-btn" onclick="resetScorecard()" style="margin-top: 10px; background-color: #666;">
   <i class="fa-solid fa-rotate-right"></i> Reset Scorecard
 </button>
@@ -137,5 +192,75 @@ function resetScorecard() {
         document.getElementById('totalScore').innerText = '0';
     }
 </script>
+<script>
+function toggleBackNine() {
+    var x = document.getElementById("backNine");
+    x.style.display = (x.style.display === "none") ? "block" : "none";
+}
+
+function calculateTotal() {
+    // 1. Calculate Front Nine
+    let frontInputs = document.querySelectorAll('.front-score');
+    let frontPars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; // The par for holes 1-9
+    let frontSum = 0;
+    
+    frontInputs.forEach((input, index) => {
+        let score = Number(input.value);
+        frontSum += score || 0;
+        if (score > 0) applyHoleColor(input, score, frontPars[index]);
+    });
+    
+    let frontTotalElem = document.getElementById('front-total');
+    frontTotalElem.innerText = frontSum;
+    applyParColor(frontSum, 36, frontTotalElem);
+
+    // 2. Calculate Back Nine
+    let backInputs = document.querySelectorAll('.back-score');
+    let backPars = [4, 4, 3, 5, 4, 4, 3, 4, 5]; // The par for holes 10-18
+    let backSum = 0;
+    
+    backInputs.forEach((input, index) => {
+        let score = Number(input.value);
+        backSum += score || 0;
+        if (score > 0) applyHoleColor(input, score, backPars[index]);
+    });
+    
+    let backTotalElem = document.getElementById('back-total');
+    backTotalElem.innerText = backSum;
+    applyParColor(backSum, 36, backTotalElem);
+
+    // 3. Calculate Grand Total
+    let grandTotal = frontSum + backSum;
+    let grandTotalElem = document.getElementById('grand-total');
+    grandTotalElem.innerText = grandTotal;
+    applyParColor(grandTotal, 72, grandTotalElem);
+}
+
+// Logic for individual hole colors
+function applyHoleColor(input, score, par) {
+    input.classList.remove('birdie', 'eagle', 'bogey', 'double-bogey', 'par');
+    
+    if (score === par - 1) input.classList.add('birdie');
+    else if (score <= par - 2) input.classList.add('eagle');
+    else if (score === par + 1) input.classList.add('bogey');
+    else if (score >= par + 2) input.classList.add('double-bogey');
+    else if (score === par) input.classList.add('par');
+}
+
+// Logic for the Total summary colors (Red/Green)
+function applyParColor(score, par, element) {
+    if (score === 0) {
+        element.style.color = "black";
+        element.innerText = "0";
+    } else {
+        let diff = score - par;
+        let displayDiff = diff > 0 ? "+" + diff : (diff === 0 ? "E" : diff);
+        element.innerText = score + " (" + displayDiff + ")";
+        
+        if (diff < 0) element.style.color = "#1b5e20"; // Under Par
+        else if (diff > 0) element.style.color = "#d32f2f"; // Over Par
+        else element.style.color = "#0288d1"; // Even
+    }
+}</script>
 </body>
 </html>
