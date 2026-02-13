@@ -148,16 +148,19 @@ The question of when golf originated sparks debate among golf historians worldwi
     <button onclick="showBeg()" style="background-color: #0d47a1; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px;">No, I'm a beginner</button>
 </div>
 
-<div id="proModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85);">
-    <div style="background-color: white; margin: 15% auto; padding: 30px; border-radius: 15px; width: 80%; max-width: 500px; position: relative; border: 3px solid #1b5e20; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: sans-serif;">
+<div id="proModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85); overflow-y: auto;">
+    <div style="background-color: white; margin: 5% auto; padding: 30px; border-radius: 15px; width: 85%; max-width: 500px; position: relative; border: 3px solid #1b5e20; box-shadow: 0 5px 25px rgba(0,0,0,0.5); font-family: sans-serif; text-align: left;">
         
-        <span onclick="closeModals()" style="position:absolute; top:10px; right:20px; font-size:35px; cursor:pointer; color:#aaa;">&times;</span>
+        <span onclick="closeModals()" style="position:absolute; top:10px; right:20px; font-size:35px; cursor:pointer; color:#aaa; line-height: 1;">&times;</span>
         
         <h2 style="color: #1b5e20; margin-top: 0;">🏆 Pro Status Confirmed!</h2>
         <p>You're in elite company! As of 2026, <strong>Scottie Scheffler</strong> continues to lead the rankings.</p>
-        <p style="background: #f1f8e9; padding: 15px; border-left: 5px solid #1b5e20; border-radius: 4px;">
-            <em>Pro Insight:</em> Modern pros focus on <strong>Strokes Gained</strong> and maintaining <strong>Low Point Control</strong>.
-        </p>
+        
+        <div style="background: #f1f8e9; padding: 15px; border-left: 5px solid #1b5e20; border-radius: 4px; margin-top: 15px;">
+            <p style="margin: 0;"><em>Pro Insight:</em> Modern pros focus on <strong>Strokes Gained</strong> and maintaining <strong>Low Point Control</strong>.</p>
+        </div>
+        
+        <button onclick="closeModals()" style="margin-top: 20px; width: 100%; padding: 10px; background: #1b5e20; color: white; border: none; border-radius: 5px; cursor: pointer;">Got it!</button>
     </div>
 </div>
 
