@@ -127,17 +127,7 @@ The question of when golf originated sparks debate among golf historians worldwi
     <p><em>Blade or Mallet style</em></p>
 </section>
   <br><hr>
- <div class="interaction-area">
-  <h3>📗 Golf Terms Glossary</h3>
-  <p>Confused by the lingo? Click a term to learn what it means!</p>
-  <div class="button-group" style="flex-wrap: wrap;">
-    <button class="golf-btn" onclick="showTerm('Birdie')">Birdie</button>
-    <button class="golf-btn" onclick="showTerm('Eagle')">Eagle</button>
-    <button class="golf-btn" onclick="showTerm('Bogey')">Bogey</button>
-    <button class="golf-btn" onclick="showTerm('Par')">Par</button>
-    <button class="golf-btn" onclick="showTerm('Mulligan')">Mulligan</button>
-  </div>
-</div>
+ 
 <audio id="golfSound" src="NEW_SWING_URL.mp3"></audio>
  
 </section>
@@ -171,313 +161,67 @@ The question of when golf originated sparks debate among golf historians worldwi
         <p>Golf is a journey. Focus on your grip and just have fun. Everyone starts at the driving range!</p>
     </div>
 </div>
-
 <script>
-function showPro() {
-    document.getElementById('proModal').style.display = 'block';
+// 2. DATA (Cleaned Phil's entry so the script can handle the dot)
+const golfLegends = [
+    { name: "Jack Nicklaus", majors: 18, status: "Legend" },
+    { name: "Tiger Woods", majors: 15, status: "Active / Legend" },
+    { name: "Bobby Jones", majors: 13, status: "Amateur Icon" },
+    { name: "Ben Hogan", majors: 9, status: "Ball Striker" },
+    { name: "Gary Player", majors: 9, status: "International" },
+    { name: "Tom Watson", majors: 8, status: "Legend" },
+    { name: "Phil Mickelson", majors: 6, status: "Active / Legend" },
+    { name: "Brooks Koepka", majors: 5, status: "Active / Major Specialist" },
+    { name: "Rory McIlroy", majors: 5, status: "Active / Grand Slam Winner" },
+    { name: "Scottie Scheffler", majors: 4, status: "Active / World No. 1" }
+];
+
+// 3. THE LEADERBOARD BUILDER (Forces the dot to the front for Phil too)
+function buildLeaderboard(data) {
+    const tableBody = document.getElementById('leaderboardBody');
+    if (!tableBody) return;
+    
+    let rows = ""; 
+    data.forEach((player, index) => {
+        // Remove any manual red dots so they don't double up
+        let cleanStatus = player.status.replace('🔴', '').trim();
+        
+        // Check for active status
+        const s = cleanStatus.toLowerCase();
+        const isActive = s.includes("active") || s.includes("world");
+        
+        const liveDot = isActive ? '<span style="color:red">🔴</span> ' : '';
+        
+        rows += `<tr>
+            <td>${index + 1}</td>
+            <td>${player.name}</td>
+            <td>${player.majors}</td>
+            <td>${liveDot}${cleanStatus}</td>
+        </tr>`;
+    });
+    tableBody.innerHTML = rows;
 }
 
-function showBeg() {
-    document.getElementById('beginnerModal').style.display = 'block';
+// 4. SEARCH & MODALS
+function searchLeaderboard() {
+    const term = document.getElementById("golferSearch").value.toLowerCase();
+    const filtered = golfLegends.filter(p => p.name.toLowerCase().includes(term));
+    buildLeaderboard(filtered);
 }
 
+function showPro() { document.getElementById('proModal').style.display = 'block'; }
+function showBeg() { document.getElementById('beginnerModal').style.display = 'block'; }
 function closeModals() {
     document.getElementById('proModal').style.display = 'none';
     document.getElementById('beginnerModal').style.display = 'none';
 }
 
-// Close when clicking the dark background area
+// 5. INITIALIZE
 window.onclick = function(event) {
-    var pro = document.getElementById('proModal');
-    var beg = document.getElementById('beginnerModal');
-    if (event.target == pro || event.target == beg) {
-        closeModals();
-    }
-}
-</script>
-<script>
-// 1. Scorecard Math & Celebration
-function updateScore() {
-    const inputs = document.querySelectorAll('.hole-score');
-    const totalDisplay = document.getElementById('totalScore');
-    const statusText = document.getElementById('scoreStatus');
-    const holePars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; 
-    
-    let total = 0;
-    let parPlayed = 0;
-    let hasValue = false;
+    if (event.target.id === 'proModal' || event.target.id === 'beginnerModal') closeModals();
+};
 
-    inputs.forEach((input, index) => {
-        let val = parseInt(input.value);
-        
-        // 1. Reset colors
-        input.classList.remove('score-eagle', 'score-birdie', 'score-par', 'score-bogey', 'score-double');
-
-        if (!isNaN(val)) {
-            total += val;
-            parPlayed += holePars[index];
-            hasValue = true;
-
-            // 2. Apply color coding to the input box
-            let diff = val - holePars[index];
-            if (diff <= -2) input.classList.add('score-eagle');
-            else if (diff === -1) input.classList.add('score-birdie');
-            else if (diff === 0) input.classList.add('score-par');
-            else if (diff === 1) input.classList.add('score-bogey');
-            else if (diff >= 2) input.classList.add('score-double');
-
-            if (val === 1) triggerCelebration();
-        }
-    });
-
-    // 3. Update the Total Display
-    if (totalDisplay) totalDisplay.innerText = total;
-
-    // 4. Update the Overall Score Message
-    if (statusText) {
-        if (!hasValue) {
-            statusText.innerText = "Start your round!";
-            statusText.style.color = "#2e7d32";
-        } else {
-            let overallDiff = total - parPlayed;
-            if (overallDiff < 0) {
-                statusText.innerText = Math.abs(overallDiff) + " Under Par";
-                statusText.style.color = "red";
-            } else if (overallDiff > 0) {
-                statusText.innerText = "+" + overallDiff + " Over Par";
-                statusText.style.color = "black";
-            } else {
-                statusText.innerText = "Even Par";
-                statusText.style.color = "green";
-            }
-        }
-    }
-}
-// 2. Reset Button Function
-function resetScorecard() {
-    document.querySelectorAll('.hole-score').forEach(input => input.value = '');
-    updateScore(); // Re-runs the math to reset totals to 0
-}
-
-// 3. Audio & Click Effects (One Listener to rule them all)
-window.addEventListener('click', function(e) {
-    // A. Swing Sound (Doesn't play if clicking buttons or inputs)
-    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
-        const swing = document.getElementById("golfSound");
-        if (swing) {
-            swing.pause();
-            swing.currentTime = 0;
-            swing.play().catch(() => {});
-        }
-    }
-
-    // B. Ripple & Grass Particles
-    const ripple = document.createElement('div');
-    ripple.className = 'click-ripple';
-    ripple.style.left = e.clientX + 'px';
-    ripple.style.top = e.clientY + 'px';
-    document.body.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-
-    for (let i = 0; i < 6; i++) {
-        const grass = document.createElement('div');
-        grass.className = 'grass-particle';
-        grass.style.left = e.clientX + 'px';
-        grass.style.top = e.clientY + 'px';
-        const vX = (Math.random() - 0.5) * 150;
-        const vY = -Math.random() * 200 - 50;
-        document.body.appendChild(grass);
-        grass.animate([
-            { transform: 'translate(0, 0)', opacity: 1 },
-            { transform: `translate(${vX}px, ${vY}px) rotate(720deg)`, opacity: 0 }
-        ], { duration: 600 }).onfinish = () => grass.remove();
-    }
-});
-
-// 4. Celebration & Modal Helpers
-function triggerCelebration() {
-    const hioSound = document.getElementById("holeInOneSound");
-    if (hioSound) { hioSound.currentTime = 0; hioSound.play().catch(() => {}); }
-}
-
-function showWelcome(type) {
-  const box = document.getElementById("welcomeBox");
-  const title = document.getElementById("welcomeTitle");
-  const content = document.getElementById("welcomeContent");
-
-  box.style.display = "block";
-
-  if (type === 'pro') {
-    title.innerHTML = "🏆 Pro Status Confirmed!";
-    content.innerHTML = `
-      <p>You're in elite company! As of February 2026, <strong>Scottie Scheffler</strong> continues to lead the World Rankings. 
-      Have you dialed in your <em>Strokes Gained</em> metrics lately?</p>
-      <div style="background: #e8f5e9; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 10px;">
-        <strong>Pro Insight:</strong> Modern pros are focusing on <em>Low Point Control</em>—ensuring the club hits the ball before the turf every single time.
-      </div>
-    `;
-    if(typeof createConfetti === 'function') createConfetti("#2e7d32"); 
-  } else {
-    title.innerHTML = "⛳ Welcome to the Tee!";
-    content.innerHTML = `
-      <p>Golf is a journey, not a race. Did you know that walking 18 holes burns about <strong>1,400 calories</strong>? It's the best workout with a view!</p>
-      <div style="background: #f1f8e9; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 10px;">
-        <strong>Beginner Tip:</strong> Focus on "Ready Golf." Be ready to hit when it's your turn to keep the game fun for everyone!
-      </div>
-    `;
-    if(typeof createConfetti === 'function') createConfetti("#4CAF50");
-  }
-}function closeWelcome() { document.getElementById("welcomeBox").style.display = "none"; }
-
-function showTerm(term) {
-  const box = document.getElementById("welcomeBox");
-  const title = document.getElementById("welcomeTitle");
-  const content = document.getElementById("welcomeContent");
-  
-  const definitions = {
-    'Birdie': 'Completing a hole in **one stroke under** Par (e.g., a 3 on a Par 4).',
-    'Eagle': 'Completing a hole in **two strokes under** Par. Very impressive!',
-    'Bogey': 'Completing a hole in **one stroke over** Par.',
-    'Par': 'The standard number of strokes an expert golfer is expected to need for a hole.',
-    'Mulligan': 'An informal "do-over" shot that doesn’t count against your score (usually only allowed in friendly games!).'
-  };
-
-  title.innerHTML = `Golf Term: ${term}`;
-  content.innerHTML = `<p>${definitions[term]}</p>
-                       <button class="golf-btn" onclick="document.getElementById('welcomeBox').style.display='none'">Got it!</button>`;
-  box.style.display = "block";
-}
-// 5. Hover Sounds for Clubs
-document.querySelectorAll('.club-card img').forEach(club => {
-    club.addEventListener('mouseenter', () => {
-        const jingle = document.getElementById("bagSound");
-        if (jingle) { jingle.currentTime = 0; jingle.volume = 0.3; jingle.play().catch(() => {}); }
-    });
-});
-// 1. Our Data Set (The "Digital Filing Cabinet")
-const golfLegends = [
-    { name: "Jack Nicklaus", majors: 18, status: "Legend" },
-    { name: "Tiger Woods", majors: 15, status: "Active/Legend" },
-    { name: "Bobby Jones", majors: 13, status: "Amateur Icon" },
-    { name: "Ben Hogan", majors: 9, status: "Ball Striker" },
-    { name: "Gary Player", majors: 9, status: "International" },
-    { name: "Tom Watson", majors: 8, status: "Legend" },
-    { name: "Phil Mickelson", majors: 6, status: "Legend/Active" },
-    { name: "Brooks Koepka", majors: 5, status: "Major Specialist" },
-    { name: "Rory McIlroy", majors: 5, status: "Grand Slam Winner" },
-    { name: "Scottie Scheffler", majors: 4, status: "World No. 1" }
-];
-// 2. Function to build the table
-function buildLeaderboard(data) {
-    const tableBody = document.getElementById('leaderboardBody');
-    tableBody.innerHTML = ''; // Clear the table first
-
-data.forEach((player, index) => {
-    const statusLower = player.status.toLowerCase();
-    
-    // 1. Check if they are modern/active
-    const isModern = statusLower.includes("active") || 
-                     statusLower.includes("specialist") || 
-                     statusLower.includes("winner") || 
-                     statusLower.includes("world");
-
-    // 2. Uniform Status Formatting (Reversed)
-    let displayStatus = player.status;
-    if (isModern) {
-        // Remove existing "Active" tags to prevent doubling up
-        let cleanTitle = player.status
-            .replace(/Active\//gi, "")
-            .replace(/\/Active/gi, "")
-            .replace(/Active /gi, "")
-            .replace(/ \/ /gi, "");
-
-        // Force the order to be: [Their Title] / Active
-        displayStatus = cleanTitle + " / Active";
-    }
-
-    const badgeClass = isModern ? "badge-active" : "badge-legend";
-
-    // 3. Add the Blinking Dot for Active Players
-    const liveDot = isModern ? '<span class="live-dot"></span> ' : '';
-
-    // 4. Icon Logic
-    let icon = player.majors >= 10 
-        ? '<i class="fa-solid fa-crown" style="color: gold;"></i> ' 
-        : '<i class="fa-solid fa-trophy" style="color: silver;"></i> ';
-
-    const row = `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${icon} ${liveDot}<strong>${player.name}</strong></td>
-            <td>${player.majors}</td>
-            <td><span class="status-badge ${badgeClass}">${displayStatus}</span></td>
-        </tr>
-    `;
-    tableBody.innerHTML += row;
-});
-// Add a blinking dot only if they are active
-const liveDot = isActive ? '<span class="live-dot"></span> ' : '';
-
-const row = `
-    <tr>
-        <td>${index + 1}</td>
-        <td>${icon} ${liveDot}<strong>${player.name}</strong></td>
-        <td>${player.majors}</td>
-        <td><span class="status-badge ${badgeClass}">${player.status}</span></td>
-    </tr>
-`;
-}
-function searchLeaderboard() {
-    const searchInput = document.getElementById("golferSearch");
-    const clearBtn = document.getElementById("clearSearch");
-    const searchTerm = searchInput.value.toLowerCase();
-    
-    // Show the 'X' button if there is text, otherwise hide it
-    clearBtn.style.display = searchTerm.length > 0 ? "block" : "none";
-
-    const filteredData = golfLegends.filter(player => 
-        player.name.toLowerCase().includes(searchTerm)
-    );
-
-    buildLeaderboard(filteredData);
-}
-
-function clearSearchField() {
-    const searchInput = document.getElementById("golferSearch");
-    const clearBtn = document.getElementById("clearSearch");
-    
-    searchInput.value = "";    // Clear the text
-    clearBtn.style.display = "none"; // Hide the button
-    
-    buildLeaderboard(golfLegends); // Show the full list again
-    searchInput.focus();           // Put the cursor back in the box
-}// 3. Function to sort the data
-function sortLeaderboard(criteria) {
-    if (criteria === 'majors') {
-        golfLegends.sort((a, b) => b.majors - a.majors); // High to Low
-    } else if (criteria === 'name') {
-        golfLegends.sort((a, b) => a.name.localeCompare(b.name)); // A to Z
-    }
-    buildLeaderboard(golfLegends); // Re-build with new order
-// This ensures they are ranked correctly as soon as you open the page
-sortLeaderboard('majors');
-}
-
-// 4. Initial Build on page load
 buildLeaderboard(golfLegends);
-window.onclick = function(event) {
-    // Get the background divs
-    var pro = document.getElementById('proModal');
-    var beg = document.getElementById('beginnerModal');
-
-    // If the thing you clicked IS the background, hide it
-    if (event.target == pro) {
-        pro.style.display = "none";
-    }
-    if (event.target == beg) {
-        beg.style.display = "none";
-    }
-}
 </script>
 </body>
 </html>
