@@ -29,7 +29,7 @@
   <a href="scorecard.html" style="color: #fbc02d; margin: 0 20px; text-decoration: none; font-family: sans-serif; font-weight: bold; font-size: 18px;">📝 Scorecard</a>
 </nav>
 <section class="scorecard-area">
-    <h2 style="text-align: center; font-family: sans-serif; color: #1b5e20;">Your Round Scorecard</h2>
+    <h2 id="top"; style="text-align: center; font-family: sans-serif; color: #1b5e20;">Your Round Scorecard</h2>
 <p style="text-align: center; color: #666; font-style: italic;">
     Course Rating: 72.4 | Slope: 132 | Yardage: 3,145
 </p>
@@ -127,6 +127,42 @@
         <img src="https://www.falconvalleygolf.com/wp-content/uploads/sites/6064/2023/01/Fvalley-scorecard-e1675092618411.jpg" alt="Falcon Valley" style="display: block; max-width: 100%; height: auto; width: 600px;">
     </div>
     <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Click hole numbers to see specific tips (Coming Soon!)</p>
+</div>
+<section id="glossary">
+  <h3>📗 Golf Terms Glossary</h3>
+  <p><em>Quickly check the lingo while you play!</em></p>
+  
+  <table border="1" style="width:100%; border-collapse: collapse; text-align: left;">
+    <tr style="background-color: #2e7d32; color: white;">
+      <th style="padding: 10px;">Term</th>
+      <th style="padding: 10px;">Definition</th>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><strong>Birdie</strong></td>
+      <td style="padding: 8px;">One stroke under par.</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><strong>Eagle</strong></td>
+      <td style="padding: 8px;">Two strokes under par.</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><strong>Bogey</strong></td>
+      <td style="padding: 8px;">One stroke over par.</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><strong>Par</strong></td>
+      <td style="padding: 8px;">The standard number of strokes for the hole.</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;"><strong>Mulligan</strong></td>
+      <td style="padding: 8px;">An unofficial "do-over" shot (not usually allowed in tournaments!).</td>
+    </tr>
+  </table>
+</section>
+<div style="text-align: right; margin-top: 10px;">
+  <a href="#top" style="text-decoration: none; background-color: #333; color: white; padding: 5px 10px; border-radius: 5px; font-size: 14px;">
+    ↑ Back to Scorecard
+  </a>
 </div>
 <script>
     // This adds up the scores automatically
@@ -261,6 +297,7 @@ function applyParColor(score, par, element) {
         else if (diff > 0) element.style.color = "#d32f2f"; // Over Par
         else element.style.color = "#0288d1"; // Even
     }
-}</script>
+}
+</script>
 </body>
 </html>
