@@ -165,139 +165,105 @@
   </a>
 </div>
 <script>
-    // This adds up the scores automatically
-const scoreInputs = document.querySelectorAll('.score');
-const totalDisplay = document.getElementById('totalScore');
-const pars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; // The Par for each hole
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Select all necessary elements
+    const allInputs = document.querySelectorAll('input[type="number"]');
+    const frontTotalElem = document.getElementById('front-total');
+    const backTotalElem = document.getElementById('back-total');
+    const grandTotalElem = document.getElementById('grand-total');
+    const resetBtn = document.getElementById('reset-btn');
 
-scoreInputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        let totalScore = 0;
-        let runningPar = 0;
-        let holesPlayed = 0;
+    // Par values for the course
+    const frontPars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; // Holes 1-9
+    const backPars = [4, 4, 3, 5, 4, 4, 3, 4, 5];  // Holes 10-18
 
-        scoreInputs.forEach((inputBox, i) => {
-            let val = Number(inputBox.value);
-            
-            if (inputBox.value !== "" && val > 0) {
-                totalScore += val;
-                runningPar += pars[i];
-                holesPlayed++;
+    // --- Calculation Logic ---
+    function updateScorecard() {
+        let frontSum = 0;
+        let frontParSum = 0;
+        let backSum = 0;
+        let backParSum = 0;
 
-                // ⛳ HOLE-BY-HOLE COLOR CODING
-                if (val < pars[i]) {
-                    inputBox.style.backgroundColor = "#ffcdd2"; // Red for Birdie/Under
-                    inputBox.style.color = "#b71c1c";
-                } else if (val > pars[i]) {
-                    inputBox.style.backgroundColor = "#bbdefb"; // Blue for Bogey/Over
-                    inputBox.style.color = "#0d47a1";
+        allInputs.forEach((input, index) => {
+            let score = parseInt(input.value);
+            if (!isNaN(score) && score > 0) {
+                // Determine if hole is Front (0-8) or Back (9-17)
+                if (index < 9) {
+                    frontSum += score;
+                    frontParSum += frontPars[index];
+                    applyHoleColor(input, score, frontPars[index]);
                 } else {
-                    inputBox.style.backgroundColor = "#c8e6c9"; // Green for Par
-                    inputBox.style.color = "#1b5e20";
+                    backSum += score;
+                    backParSum += backPars[index - 9];
+                    applyHoleColor(input, score, backPars[index - 9]);
                 }
             } else {
-                inputBox.style.backgroundColor = "white"; // Reset if empty
+                input.style.backgroundColor = "white"; // Reset color if empty
+                input.style.color = "black";
             }
         });
 
-        // Update the Total Display
-        if (holesPlayed === 0) {
-            totalDisplay.innerText = "0";
-            totalDisplay.style.color = "black";
-            return;
-        }
+        // Update Displays
+        displayResult(frontTotalElem, frontSum, frontParSum);
+        displayResult(backTotalElem, backSum, backParSum);
+        displayResult(grandTotalElem, (frontSum + backSum), (frontParSum + backParSum));
+    }
 
-        let diff = totalScore - runningPar;
-        let status = diff < 0 ? ` (${Math.abs(diff)} Under)` : diff > 0 ? ` (${diff} Over)` : " (E)";
-        totalDisplay.style.color = diff < 0 ? "red" : diff > 0 ? "blue" : "green";
-        totalDisplay.innerText = totalScore + status;
+    // Helper to apply colors to individual hole inputs
+    function applyHoleColor(input, score, par) {
+        if (score < par) {
+            input.style.backgroundColor = "#ffcdd2"; // Birdie/Under (Red text style)
+            input.style.color = "#b71c1c";
+        } else if (score > par) {
+            input.style.backgroundColor = "#bbdefb"; // Bogey (Blue)
+            input.style.color = "#0d47a1";
+        } else {
+            input.style.backgroundColor = "#c8e6c9"; // Par (Green)
+            input.style.color = "#1b5e20";
+        }
+    }
+
+    // Helper to display totals with (+/-) par relation
+    function displayResult(element, score, par) {
+        if (!element) return;
+        if (score === 0) {
+            element.innerText = "0 (E)";
+            element.style.color = "black";
+        } else {
+            let diff = score - par;
+            let sign = diff > 0 ? "+" : "";
+            let rel = diff === 0 ? "E" : sign + diff;
+            element.innerText = `${score} (${rel})`;
+            element.style.color = diff < 0 ? "red" : (diff > 0 ? "blue" : "green");
+        }
+    }
+
+    // --- Reset Logic ---
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            allInputs.forEach(input => {
+                input.value = '';
+                input.style.backgroundColor = "white";
+            });
+            updateScorecard(); // Refresh the totals to 0
+            console.log("Scorecard Reset Successful");
+        });
+    }
+
+    // Update whenever a user types
+    allInputs.forEach(input => {
+        input.addEventListener('input', updateScorecard);
     });
 });
 
-function resetScorecard() {
-    scoreInputs.forEach(input => {
-        input.value = '';
-        input.style.backgroundColor = "white";
-    });
-    totalDisplay.innerText = '0';
-    totalDisplay.style.color = "black";
-}
-    // This makes the Reset button work
-    function resetScorecard() {
-        document.querySelectorAll('.score').forEach(i => i.value = '');
-        document.getElementById('totalScore').innerText = '0';
-    }
-</script>
-<script>
+// Toggle function stays global so the button can find it
 function toggleBackNine() {
     var x = document.getElementById("backNine");
-    x.style.display = (x.style.display === "none") ? "block" : "none";
-}
-
-function calculateTotal() {
-    // 1. Calculate Front Nine
-    let frontInputs = document.querySelectorAll('.front-score');
-    let frontPars = [4, 3, 4, 4, 5, 3, 4, 4, 5]; // The par for holes 1-9
-    let frontSum = 0;
-    
-    frontInputs.forEach((input, index) => {
-        let score = Number(input.value);
-        frontSum += score || 0;
-        if (score > 0) applyHoleColor(input, score, frontPars[index]);
-    });
-    
-    let frontTotalElem = document.getElementById('front-total');
-    frontTotalElem.innerText = frontSum;
-    applyParColor(frontSum, 36, frontTotalElem);
-
-    // 2. Calculate Back Nine
-    let backInputs = document.querySelectorAll('.back-score');
-    let backPars = [4, 4, 3, 5, 4, 4, 3, 4, 5]; // The par for holes 10-18
-    let backSum = 0;
-    
-    backInputs.forEach((input, index) => {
-        let score = Number(input.value);
-        backSum += score || 0;
-        if (score > 0) applyHoleColor(input, score, backPars[index]);
-    });
-    
-    let backTotalElem = document.getElementById('back-total');
-    backTotalElem.innerText = backSum;
-    applyParColor(backSum, 36, backTotalElem);
-
-    // 3. Calculate Grand Total
-    let grandTotal = frontSum + backSum;
-    let grandTotalElem = document.getElementById('grand-total');
-    grandTotalElem.innerText = grandTotal;
-    applyParColor(grandTotal, 72, grandTotalElem);
-}
-
-// Logic for individual hole colors
-function applyHoleColor(input, score, par) {
-    input.classList.remove('birdie', 'eagle', 'bogey', 'double-bogey', 'par');
-    
-    if (score === par - 1) input.classList.add('birdie');
-    else if (score <= par - 2) input.classList.add('eagle');
-    else if (score === par + 1) input.classList.add('bogey');
-    else if (score >= par + 2) input.classList.add('double-bogey');
-    else if (score === par) input.classList.add('par');
-}
-
-// Logic for the Total summary colors (Red/Green)
-function applyParColor(score, par, element) {
-    if (score === 0) {
-        element.style.color = "black";
-        element.innerText = "0";
-    } else {
-        let diff = score - par;
-        let displayDiff = diff > 0 ? "+" + diff : (diff === 0 ? "E" : diff);
-        element.innerText = score + " (" + displayDiff + ")";
-        
-        if (diff < 0) element.style.color = "#1b5e20"; // Under Par
-        else if (diff > 0) element.style.color = "#d32f2f"; // Over Par
-        else element.style.color = "#0288d1"; // Even
+    if (x) {
+        x.style.display = (x.style.display === "none" || x.style.display === "") ? "block" : "none";
     }
 }
 </script>
 </body>
 </html>
+
