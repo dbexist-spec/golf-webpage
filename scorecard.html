@@ -214,14 +214,7 @@ scoreInputs.forEach((input, index) => {
     });
 });
 
-function resetScorecard() {
-    scoreInputs.forEach(input => {
-        input.value = '';
-        input.style.backgroundColor = "white";
-    });
-    totalDisplay.innerText = '0';
-    totalDisplay.style.color = "black";
-}
+
     // This makes the Reset button work
     function resetScorecard() {
         document.querySelectorAll('.score').forEach(i => i.value = '');
@@ -301,3 +294,4 @@ function applyParColor(score, par, element) {
 </script>
 </body>
 </html>
+
