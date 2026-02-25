@@ -8,6 +8,29 @@ button:hover, a:hover, .golf-btn:hover {
 .grass-particle, .click-ripple {
     pointer-events: none !important;
 }
+img {
+  max-width: 100%;
+  height: auto;
+}
+summary {
+  padding: 15px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  list-style: none; /* Removes the default arrow in some browsers */
+}
+
+summary:hover {
+  background-color: #e2e2e2;
+}
+
+.club-content {
+  padding: 15px;
+  border-left: 3px solid #4CAF50; /* Adds a nice green accent bar */
+  margin-bottom: 20px;
+}
 
 /* Give your buttons a higher priority */
 .interaction-area {
