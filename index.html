@@ -232,6 +232,32 @@ window.onclick = function(event) {
 };
 
 buildLeaderboard(golfLegends);
+// Select the buttons and the table
+const btnSortMajors = document.querySelector('button:contains("Sort by Majors")') || document.querySelectorAll('button')[0];
+const btnSortAZ = document.querySelector('button:contains("Sort A-Z")') || document.querySelectorAll('button')[1];
+const tableBody = document.querySelector('table tbody');
+
+// Function to sort the table
+function sortTable(columnIndex, isNumeric) {
+  const rows = Array.from(tableBody.querySelectorAll('tr'));
+  
+  const sortedRows = rows.sort((a, b) => {
+    const valA = a.cells[columnIndex].innerText.trim();
+    const valB = b.cells[columnIndex].innerText.trim();
+
+    if (isNumeric) {
+      return parseInt(valB) - parseInt(valA); // Sort High to Low for Majors
+    }
+    return valA.localeCompare(valB); // Sort A-Z for Names
+  });
+
+  // Re-append rows in the new order
+  tableBody.append(...sortedRows);
+}
+
+// Add event listeners to your buttons
+btnSortMajors.addEventListener('click', () => sortTable(2, true)); // Index 2 is Majors
+btnSortAZ.addEventListener('click', () => sortTable(1, false));   // Index 1 is Player Name
 </script>
 </body>
 </html>
