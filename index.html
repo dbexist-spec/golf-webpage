@@ -62,8 +62,8 @@ The question of when golf originated sparks debate among golf historians worldwi
   <h2 style="color: #2e7d32; text-align: center;">🏆 Global Legends Leaderboard</h2>
   
   <div style="text-align: center; margin-bottom: 15px;">
-    <button class="golf-btn" onclick="sortLeaderboard('majors')">Sort by Majors</button>
-    <button class="golf-btn" onclick="sortLeaderboard('name')">Sort A-Z</button>
+   <button class="golf-btn" onclick="sortTable(2, true)">Sort by Majors</button>
+<button class="golf-btn" onclick="sortTable(1, false)">Sort A-Z</button>
   </div>
 
   <table id="legendTable">
@@ -232,10 +232,10 @@ window.onclick = function(event) {
 };
 
 buildLeaderboard(golfLegends);
+
 // Select the buttons and the table
-const btnSortMajors = document.querySelector('button:contains("Sort by Majors")') || document.querySelectorAll('button')[0];
-const btnSortAZ = document.querySelector('button:contains("Sort A-Z")') || document.querySelectorAll('button')[1];
-const tableBody = document.querySelector('table tbody');
+const btnSortMajors = document.getElementById('btnMajors');
+const btnSortAZ = document.getElementById('btnAZ');const tableBody = document.querySelector('table tbody');
 
 // Function to sort the table
 function sortTable(columnIndex, isNumeric) {
@@ -255,9 +255,6 @@ function sortTable(columnIndex, isNumeric) {
   tableBody.append(...sortedRows);
 }
 
-// Add event listeners to your buttons
-btnSortMajors.addEventListener('click', () => sortTable(2, true)); // Index 2 is Majors
-btnSortAZ.addEventListener('click', () => sortTable(1, false));   // Index 1 is Player Name
 </script>
 </body>
 </html>
